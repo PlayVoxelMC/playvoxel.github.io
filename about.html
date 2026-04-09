@@ -30,9 +30,26 @@
     </div>
     <script>
       if ('fetch' in window) {
-        fetch('nav.html').then(response => response.text()).then(html => {
-          document.getElementById('nav-placeholder').innerHTML = html;
-        }).catch(() => {});
+        const loadDiscordLink = async () => {
+          try {
+            const response = await fetch('assets/links/discord.txt');
+            if (!response.ok) throw new Error('Discord link not found');
+            const discordUrl = (await response.text()).trim();
+            if (!discordUrl) throw new Error('Discord link empty');
+            const navLink = document.getElementById('nav-discord-link');
+            if (navLink) navLink.href = discordUrl;
+          } catch (error) {
+            console.warn('Unable to load Discord link', error);
+          }
+        };
+
+        fetch('nav.html')
+          .then(response => response.text())
+          .then(html => {
+            document.getElementById('nav-placeholder').innerHTML = html;
+            return loadDiscordLink();
+          })
+          .catch(() => {});
       }
     </script>
   </body>
