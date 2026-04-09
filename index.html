@@ -1,13 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta description="VoxelMC, the best Minecraft server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="VoxelMC homepage">
     <title>Play VoxelMC</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>Notice: this page is currently incomplete</h3>
-    <h2>VoxelMC, a good mc server</h2>
-    <h1>Owned By Thyir0n, Sebminecrafter, 41stelitecorp, nevergonnagiveyouuppp on discord!</h1>
+    <div class="page-shell">
+      <div id="nav-placeholder" class="nav-shell"></div>
+      <main class="content">
+        <section class="hero">
+          <p class="eyebrow">Welcome to VoxelMC</p>
+          <h1>Modern Minecraft community page</h1>
+          <p class="lead">This is the placeholder homepage for VoxelMC. The site layout is ready, with navigation and clean styling.</p>
+          <div class="card-grid">
+            <a class="card" href="about.html">
+              <h2>About the server</h2>
+              <p>Learn more about the community, team, and future plans.</p>
+            </a>
+            <a class="card" href="https://discord.com" target="_blank" rel="noreferrer">
+              <h2>Join Discord</h2>
+              <p>Connect with players, see announcements, and get support.</p>
+            </a>
+          </div>
+        </section>
+        <section class="section">
+          <h2>Site placeholders</h2>
+          <ul>
+            <li>Home overview</li>
+            <li>About page</li>
+            <li>Navigation bar stored in nav.html</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    <script>
+      if ('fetch' in window) {
+        fetch('nav.html').then(response => response.text()).then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+        }).catch(() => {});
+      }
+    </script>
   </body>
 </html>
