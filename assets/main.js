@@ -9,96 +9,87 @@ function addItem(object, objhtml, parent, first) {
       parent.append(object);
     }
   } catch (error) {
-    console.error("Failed to add item! ", error)
+    console.error("Failed to add item! ", error);
   }
 }
 
 async function loadLinks() {
   try {
-    const response = await fetch('/assets/links.html');
+    const response = await fetch("/assets/links.html");
     if (!response.ok) {
-      throw new Error('Links file not found');
+      throw new Error("Links file not found");
     }
     addItem(
-      document.createElement('div'), 
+      document.createElement("div"),
       await response.text(),
       document.head,
-      false
-    )
+      false,
+    );
   } catch (error) {
-    console.error('Unable to load links! ', error);
+    console.error("Unable to load links! ", error);
   }
 }
 
 async function loadDiscordLinks() {
   let discordUrl = "javascript:alert('Could not get URL, sorry.');";
   try {
-    const response = await fetch('/assets/links/discord.txt');
+    const response = await fetch("/assets/links/discord.txt");
 
     if (response.ok) {
       const text = (await response.text()).trim();
       if (text) discordUrl = text;
-      else console.error('Discord link empty');
+      else console.error("Discord link empty");
     } else {
-      console.error('Discord link not found');
+      console.error("Discord link not found");
     }
-
   } catch (error) {
-    console.error('Unable to load Discord link', error);
+    console.error("Unable to load Discord link", error);
   }
 
   // Change all discord class-ed elems
-  document.querySelectorAll('.discord')
-    .forEach(el => {el.href = discordUrl;});
+  document.querySelectorAll(".discord").forEach((el) => {
+    el.href = discordUrl;
+  });
 }
 
 async function loadNav() {
   try {
-    const response = await fetch('/assets/nav.html');
+    const response = await fetch("/assets/nav.html");
     if (!response.ok) {
-      throw new Error('Nav file not found');
+      throw new Error("Nav file not found");
     }
     addItem(
-      document.createElement('nav'),
+      document.createElement("nav"),
       await response.text(),
       document.body,
-      true
-    )
+      true,
+    );
   } catch (error) {
-    console.error('Unable to load nav! ', error);
+    console.error("Unable to load nav! ", error);
   }
 }
 
 async function loadFooter() {
   try {
-    const response = await fetch('/assets/footer.html');
+    const response = await fetch("/assets/footer.html");
     if (!response.ok) {
-      throw new Error('Footer file not found');
+      throw new Error("Footer file not found");
     }
     addItem(
-      document.createElement('footer'), 
+      document.createElement("footer"),
       await response.text(),
       document.body,
-      false
-    )
+      false,
+    );
   } catch (error) {
-    console.error('Unable to load footer! ', error);
+    console.error("Unable to load footer! ", error);
   }
 }
 
-function initLayout() {
-  if (!('fetch' in window)) {
-    throw new Error('Missing fetch function!');
-  }
-
-  loadLinks();
-  loadNav();
-  loadFooter();
-  loadDiscordLinks();
+if (!("fetch" in window)) {
+  throw new Error("Missing fetch function!");
 }
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initLayout);
-} else {
-  initLayout();
-}
+loadLinks();
+loadNav();
+loadFooter();
+loadDiscordLinks();
