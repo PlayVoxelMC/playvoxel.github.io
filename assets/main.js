@@ -1,5 +1,6 @@
 // Script to load website layout, etc.
 
+// rest of stuff
 function addItem(object, objhtml, parent, first) {
   try {
     if (objhtml) object.innerHTML = objhtml;
@@ -93,3 +94,10 @@ loadLinks();
 loadNav();
 loadFooter();
 loadDiscordLinks();
+
+// Remove loader colors
+addEventListener("DOMContentLoaded", (event) => {
+  setTimeout(() => {
+    document.getElementById("loader").remove();
+  }, 75);
+});
