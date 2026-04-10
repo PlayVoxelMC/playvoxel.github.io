@@ -20,7 +20,7 @@ async function loadLinks() {
       throw new Error('Links file not found');
     }
     addItem(
-      document.createElement('footer'), 
+      document.createElement('div'), 
       await response.text(),
       document.head,
       false
